@@ -1,0 +1,63 @@
+/.*.swp
+/*.dSYM
+*.a
+*.so
+*.so.?*
+*.dll
+*.exe
+*.dylib
+*~
+*.pyc
+__pycache__
+
+# YouCompleteMe configuration.
+.ycm_extra_conf.pyc
+!.ycm_extra_conf.py
+
+# Clang-format style.
+!.clang-format
+
+# exuberant ctags.
+tags
+
+# cscope.
+cscope.*
+ncscope.out
+
+# lcov
+*.lcov
+/lcov*
+
+# cmake files.
+/Testing
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+*.cmake
+!/cmake/Modules/*.cmake
+
+# makefiles.
+Makefile
+
+# ninja generated files.
+.ninja_deps
+.ninja_log
+build.ninja
+install_manifest.txt
+rules.ninja
+
+# in-source build.
+bin/
+lib/
+
+# out-of-source build top-level folders.
+build/
+_build/
+
+# Generated test data file
+exout
+*.inf
+*.nam
+*.off
+*.seq
+*.src
