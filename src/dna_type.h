@@ -8,24 +8,19 @@
 #ifndef DNA_TYPE_H_
 #define DNA_TYPE_H_
 
-#include "sequence_type.h"
 #include <string>
 
+#include "sequence_type.h"
+
 class DnaType : public SequenceType {
-public:
-  std::string GetRegularLetters() const {
-    return kRegularLetters;
-  }
+ public:
+  std::string GetRegularLetters() const { return kRegularLetters; }
 
-  std::string GetAmbiguousLetters() const {
-    return kAmbiguousLetters;
-  }
+  std::string GetAmbiguousLetters() const { return kAmbiguousLetters; }
 
-  char GetUnknownLetter() const {
-    return kUnknownLetter;
-  }
+  char GetUnknownLetter() const { return kUnknownLetter; }
 
-private:
+ private:
   static const char kUnknownLetter;
   static const std::string kRegularLetters;
   static const std::string kAmbiguousLetters;

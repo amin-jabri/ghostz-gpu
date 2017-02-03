@@ -1,19 +1,18 @@
-#include <gtest/gtest.h>
-#include <string>
-#include <sstream>
-#include <stdint.h>
-#include <fstream>
-#include <vector>
 #include "../src/reduced_alphabet_file_reader.h"
 
+#include <stdint.h>
+
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include <gtest/gtest.h>
 
 using namespace std;
 
-
-TEST(RedicedAlphabetFileReaderTest, Read)
-{
-  string reduced_alphabet =
-       "AR NDCQEG HIL KMFPST WYV B Z X";
+TEST(RedicedAlphabetFileReaderTest, Read) {
+  string reduced_alphabet = "AR NDCQEG HIL KMFPST WYV B Z X";
   istringstream in(reduced_alphabet);
   vector<string> alphabet_sets;
   ReducedAlphabetFileReader reduced_alphabet_reader;

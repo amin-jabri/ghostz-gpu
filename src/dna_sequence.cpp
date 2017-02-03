@@ -6,18 +6,21 @@
  */
 
 #include "dna_sequence.h"
+
+#include <stdint.h>
+
+#include <algorithm>
+#include <map>
 #include <sstream>
 #include <string>
-#include <map>
-#include <algorithm>
-#include <stdint.h>
 
 using namespace std;
 
 string DnaSequence::GetComplementaryStrand(const string &dna) {
   string new_sequence(dna);
-  reverse(new_sequence.begin(),new_sequence.end());
-  transform(new_sequence.begin(), new_sequence.end(), new_sequence.begin(),ToComplementaryLetter());
+  reverse(new_sequence.begin(), new_sequence.end());
+  transform(new_sequence.begin(), new_sequence.end(), new_sequence.begin(),
+            ToComplementaryLetter());
   return new_sequence;
 }
 

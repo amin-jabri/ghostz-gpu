@@ -5,26 +5,28 @@
  *      Author: shu
  */
 
-#include <gtest/gtest.h>
-#include <string>
-#include <stdint.h>
-#include <fstream>
-#include <limits.h>
-#include "../src/score_matrix.h"
-#include "../src/alphabet_coder.h"
-#include "../src/sequence_type.h"
-#include "../src/protein_type.h"
-#include "../src/dna_type.h"
-#include "../src/score_matrix.h"
-#include "../src/edit_blocks.h"
 #include "../src/gapped_extender.h"
+#include "../src/alphabet_coder.h"
+#include "../src/dna_type.h"
+#include "../src/edit_blocks.h"
+#include "../src/protein_type.h"
+#include "../src/score_matrix.h"
+#include "../src/score_matrix.h"
+#include "../src/sequence_type.h"
+
+#include <limits.h>
+#include <stdint.h>
+
+#include <fstream>
+#include <string>
+
+#include <gtest/gtest.h>
 
 using namespace std;
 
-TEST(GappedExtenderTest, Extender)
-{
+TEST(GappedExtenderTest, Extender) {
   DnaType type;
-  AlphabetCoder coder( type );
+  AlphabetCoder coder(type);
   AlphabetCoder::Code delimiter_code = coder.GetMaxCode() + 1;
   ScoreMatrix score_matrix("test_matrix", 4, 2, -1);
 
@@ -46,14 +48,15 @@ TEST(GappedExtenderTest, Extender)
   EditBlocks edit_blocks;
 
   GappedExtender e;
-  e.ExtendOneSide(&encoded_seq0[1], encoded_seq1.size() - 1, &encoded_seq1[1], delimiter_code, false, score_matrix, 0, 1,
-      INT_MAX, &result_score, &seq0_pos, &seq1_pos, &edit_blocks);
+  e.ExtendOneSide(&encoded_seq0[1], encoded_seq1.size() - 1, &encoded_seq1[1],
+                  delimiter_code, false, score_matrix, 0, 1, INT_MAX,
+                  &result_score, &seq0_pos, &seq1_pos, &edit_blocks);
 
   EXPECT_EQ(7, result_score);
   EXPECT_EQ(4, seq0_pos);
   EXPECT_EQ(3, seq1_pos);
 
-  vector<EditBlocks::EditOpType> edit_array =  edit_blocks.ToVector();
+  vector<EditBlocks::EditOpType> edit_array = edit_blocks.ToVector();
 
 #if 0
   int seq0_position = seq0_pos;

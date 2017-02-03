@@ -5,38 +5,41 @@
  *      Author: shu
  */
 
-#include <iostream>
-#include <stdint.h>
-#include <vector>
-#include <string.h>
-#include <string>
-#include <algorithm>
-#include <limits.h>
-#include "sequence_type.h"
-#include "alphabet_coder.h"
 #include "reduced_alphabet_coder.h"
+
+#include <limits.h>
+#include <stdint.h>
+#include <string.h>
+
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "alphabet_coder.h"
+#include "sequence_type.h"
 
 using namespace std;
 
-ReducedAlphabetCoder::ReducedAlphabetCoder()
-{}
+ReducedAlphabetCoder::ReducedAlphabetCoder() {}
 
-ReducedAlphabetCoder::ReducedAlphabetCoder(const SequenceType &type) :
-    AlphabetCoder(type) {
-}
+ReducedAlphabetCoder::ReducedAlphabetCoder(const SequenceType &type)
+    : AlphabetCoder(type) {}
 
-ReducedAlphabetCoder::ReducedAlphabetCoder(const SequenceType &type, const std::vector<std::string> &alphabet_sets) {
+ReducedAlphabetCoder::ReducedAlphabetCoder(
+    const SequenceType &type, const std::vector<std::string> &alphabet_sets) {
   Set(type, alphabet_sets);
 }
 
-ReducedAlphabetCoder::~ReducedAlphabetCoder()
-{}
+ReducedAlphabetCoder::~ReducedAlphabetCoder() {}
 
-bool ReducedAlphabetCoder::Set(const SequenceType &type, const std::vector<std::string> &alphabet_sets) {
+bool ReducedAlphabetCoder::Set(const SequenceType &type,
+                               const std::vector<std::string> &alphabet_sets) {
   vector<string> upper_alphabet_sets(alphabet_sets.size());
   for (size_t i = 0; i < upper_alphabet_sets.size(); ++i) {
     upper_alphabet_sets[i].resize(alphabet_sets[i].size());
-    transform(alphabet_sets[i].begin(), alphabet_sets[i].end(), upper_alphabet_sets[i].begin(), ToUpper());
+    transform(alphabet_sets[i].begin(), alphabet_sets[i].end(),
+              upper_alphabet_sets[i].begin(), ToUpper());
   }
 
   min_regular_letter_code_ = 0;
@@ -52,19 +55,22 @@ bool ReducedAlphabetCoder::Set(const SequenceType &type, const std::vector<std::
 
   transform(letters.begin(), letters.end(), letters.begin(), ToUpper());
   for (size_t i = 0; i < ambiguous_letters_offset; ++i) {
-    char representative_alphabet = GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
-    if(representative_alphabet == letters[i]) {
+    char representative_alphabet =
+        GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
+    if (representative_alphabet == letters[i]) {
       ++number_codes;
     }
   }
   max_regular_letter_code_ = number_codes - 1;
   for (size_t i = ambiguous_letters_offset; i < unkown_letter_offset; ++i) {
-    char representative_alphabet = GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
-    if(representative_alphabet == letters[i]) {
+    char representative_alphabet =
+        GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
+    if (representative_alphabet == letters[i]) {
       ++number_codes;
     }
   }
-  char representative_alphabet = GetRepresentativeAlphabet(upper_alphabet_sets, letters[unkown_letter_offset]);
+  char representative_alphabet = GetRepresentativeAlphabet(
+      upper_alphabet_sets, letters[unkown_letter_offset]);
   unknown_code_ = representative_alphabet;
   if (representative_alphabet == letters[unkown_letter_offset]) {
     ++number_codes;
@@ -76,9 +82,10 @@ bool ReducedAlphabetCoder::Set(const SequenceType &type, const std::vector<std::
   }
 
   Code code = 0;
-  decode_map_.resize(max_code_ + 1,unknown_letter_);
+  decode_map_.resize(max_code_ + 1, unknown_letter_);
   for (uint32_t i = 0; i < letters.length(); ++i) {
-    representative_alphabet = GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
+    representative_alphabet =
+        GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
     if (representative_alphabet == letters[i]) {
       code_map_[static_cast<int>(letters[i])] = code;
       code_map_[tolower(letters[i])] = code;
@@ -87,7 +94,8 @@ bool ReducedAlphabetCoder::Set(const SequenceType &type, const std::vector<std::
     }
   }
   for (uint32_t i = 0; i < letters.length(); ++i) {
-    representative_alphabet = GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
+    representative_alphabet =
+        GetRepresentativeAlphabet(upper_alphabet_sets, letters[i]);
     if (representative_alphabet != letters[i]) {
       code = code_map_[static_cast<int>(representative_alphabet)];
       code_map_[static_cast<int>(letters[i])] = code;
@@ -97,7 +105,8 @@ bool ReducedAlphabetCoder::Set(const SequenceType &type, const std::vector<std::
   return true;
 }
 
-char ReducedAlphabetCoder::GetRepresentativeAlphabet(const std::vector<std::string> &alphabet_sets, const char c) {
+char ReducedAlphabetCoder::GetRepresentativeAlphabet(
+    const std::vector<std::string> &alphabet_sets, const char c) {
   for (size_t i = 0; i < alphabet_sets.size(); ++i) {
     size_t count = 0;
     for (; count < alphabet_sets[i].size(); ++count) {
@@ -108,4 +117,3 @@ char ReducedAlphabetCoder::GetRepresentativeAlphabet(const std::vector<std::stri
   }
   return c;
 }
-

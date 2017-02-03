@@ -12,20 +12,18 @@
 #include <tr1/memory>
 #else
 #include <string>
-// for nvcc 
+// for nvcc
 #define __aligned__ ignored
 #include <boost/tr1/memory.hpp>
 #undef __aligned__
 #endif
 
-
 class SequenceType {
-public:
+ public:
   virtual ~SequenceType();
   virtual std::string GetRegularLetters() const = 0;
   virtual std::string GetAmbiguousLetters() const = 0;
   virtual char GetUnknownLetter() const = 0;
-
 };
 
 typedef std::tr1::shared_ptr<SequenceType> SequenceTypePtr;

@@ -8,17 +8,16 @@
 #ifndef PROTEIN_SEQUENCE_H_
 #define PROTEIN_SEQUENCE_H_
 
-#include "sequence.h"
 #include <string>
 
-class ProteinSequence : public Sequence{
-public:
-  ProteinSequence(const std::string &name, const std::string &sequence_data)
-  : Sequence(name, sequence_data)
-  {}
+#include "sequence.h"
 
-  virtual ~ProteinSequence()
-  {}
+class ProteinSequence : public Sequence {
+ public:
+  ProteinSequence(const std::string &name, const std::string &sequence_data)
+      : Sequence(name, sequence_data) {}
+
+  virtual ~ProteinSequence() {}
 };
 
 #endif /* PROTEIN_SEQUENCE_H_ */

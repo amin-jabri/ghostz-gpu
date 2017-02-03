@@ -7,8 +7,6 @@
 
 #include "dna_type.h"
 
-using namespace std;
-
-const string DnaType::kRegularLetters = "ACGT";
-const string DnaType::kAmbiguousLetters = "";
+const std::string DnaType::kRegularLetters = "ACGT";
+const std::string DnaType::kAmbiguousLetters = "";
 const char DnaType::kUnknownLetter = 'N';

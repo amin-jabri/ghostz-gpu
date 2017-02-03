@@ -8,23 +8,24 @@
 #ifndef TRANSLATOR_H_
 #define TRANSLATOR_H_
 
+#include <stdint.h>
+
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
-#include <stdint.h>
 
 class DnaSequence;
 class ProteinSequence;
 
-
 class Translator {
-public:
+ public:
   Translator();
-  void Translate(const DnaSequence &dna, std::vector<ProteinSequence> &proteins);
+  void Translate(const DnaSequence &dna,
+                 std::vector<ProteinSequence> &proteins);
 
-private:
+ private:
   std::vector<std::string> start_codons_;
-  std::map<std::string, std::string>codon_table_;
+  std::map<std::string, std::string> codon_table_;
 };
 
 #endif /* TRANSLATOR_H_ */

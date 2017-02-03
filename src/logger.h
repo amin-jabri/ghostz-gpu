@@ -13,34 +13,30 @@
 #include <string>
 
 class Logger {
-public:
-
+ public:
   static Logger* GetInstance() {
     static Logger instance;
     return &instance;
- }
+  }
 
   void ErrorLog(std::string message) {
-//#pragma omp critical(lock_)
+    //#pragma omp critical(lock_)
     std::cout << "error : " << message << std::endl;
   }
 
   void WarningLog(std::string message) {
-//#pragma omp critical(lock_)
+    //#pragma omp critical(lock_)
     std::cout << "warning : " << &message << std::endl;
   }
 
   void Log(std::string message) {
-//#pragma omp critical(lock_)
+    //#pragma omp critical(lock_)
     std::cout << message << std::endl;
   }
 
-private:
-  Logger()
-  {
-  }
-  ~Logger() {
-  }
+ private:
+  Logger() {}
+  ~Logger() {}
   Logger(const Logger& rhs);
   Logger operator=(const Logger& rhs);
 };

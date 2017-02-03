@@ -7,11 +7,6 @@
 
 #include "query.h"
 
-using namespace std;
+Query::Query() : sequence_delimiter_(0), name_(""), sequence_(0) {}
 
-Query::Query()
-:sequence_delimiter_(0), name_(""), sequence_(0)
-{}
-
-Query::~Query()
-{}
+Query::~Query() {}

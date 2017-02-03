@@ -5,22 +5,23 @@
  *      Author: shu
  */
 
-#include <limits.h>
-#include <vector>
-#include <string>
 #include "reduced_alphabet_file_reader.h"
 
-using namespace std;
+#include <limits.h>
 
-bool ReducedAlphabetFileReader::Read(istream &in, vector<string> &alphabet_sets) {
+#include <string>
+#include <vector>
+
+bool ReducedAlphabetFileReader::Read(std::istream &in,
+                                     std::vector<std::string> &alphabet_sets) {
   alphabet_sets.resize(0);
-  string::size_type index;
-  string line;
+  std::string::size_type index;
+  std::string line;
   std::getline(in, line);
-  string delim = " ";
-  string alphabet_set = "";
+  std::string delim = " ";
+  std::string alphabet_set = "";
   index = line.find_first_of(delim);
-  while (index != string::npos) {
+  while (index != std::string::npos) {
     if (index > 0) {
       alphabet_set = line.substr(0, index);
       alphabet_sets.push_back(alphabet_set);

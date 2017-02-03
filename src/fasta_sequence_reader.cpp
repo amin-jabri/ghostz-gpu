@@ -5,23 +5,20 @@
  *      Author: shu
  */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cctype>
-#include <algorithm>
-#include <functional>
 #include "fasta_sequence_reader.h"
+
+#include <algorithm>
+#include <cctype>
+#include <fstream>
+#include <functional>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
-FastaSequenceReader::FastaSequenceReader() :
-    in_(NULL) {
-}
+FastaSequenceReader::FastaSequenceReader() : in_(NULL) {}
 
-FastaSequenceReader::FastaSequenceReader(std::istream &in) :
-    in_(&in) {
-}
+FastaSequenceReader::FastaSequenceReader(std::istream &in) : in_(&in) {}
 
 bool FastaSequenceReader::Read(std::string &name, std::string &sequence) {
   name.clear();
@@ -51,11 +48,13 @@ bool FastaSequenceReader::Read(std::string &name, std::string &sequence) {
       std::getline(*in_, line);
       if (line.length() != 0) {
         if (line.at(0) != '>') {
-          std::string::iterator left = std::find_if(line.begin(), line.end(),
-              std::not1(std::ptr_fun<int, int>(isspace)));
+          std::string::iterator left =
+              std::find_if(line.begin(), line.end(),
+                           std::not1(std::ptr_fun<int, int>(isspace)));
 
-          std::string::reverse_iterator right = std::find_if(line.rbegin(),
-              line.rend(), std::not1(std::ptr_fun<int, int>(isspace)));
+          std::string::reverse_iterator right =
+              std::find_if(line.rbegin(), line.rend(),
+                           std::not1(std::ptr_fun<int, int>(isspace)));
           line = std::string(left, right.base());
           sequence += line;
         } else {
@@ -63,7 +62,8 @@ bool FastaSequenceReader::Read(std::string &name, std::string &sequence) {
         }
       }
     }
-    std::transform(sequence.begin(), sequence.end(), sequence.begin(), ::toupper);
+    std::transform(sequence.begin(), sequence.end(), sequence.begin(),
+                   ::toupper);
     if (in_->eof()) {
       in_->clear();
     }

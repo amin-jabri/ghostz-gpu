@@ -8,64 +8,63 @@
 #ifndef DENSE_HASH_INVERTED_INDEX_H_
 #define DENSE_HASH_INVERTED_INDEX_H_
 
-#include <vector>
-#include <fstream>
-#include <stdint.h>
-#include <algorithm>
 #include <assert.h>
-#include <vector>
+#include <stdint.h>
+
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <tr1/unordered_map>
-#include "alphabet_coder.h"
+#include <utility>
+#include <vector>
 
-template<typename TKey, typename TValue>
+template <typename TKey, typename TValue>
 class DenseHashInvertedIndex {
-public:
+ public:
   typedef TKey Key;
   typedef TValue Value;
   DenseHashInvertedIndex();
-  template<typename TInputIterator>
+  template <typename TInputIterator>
   DenseHashInvertedIndex(TInputIterator first, TInputIterator last);
   DenseHashInvertedIndex(std::istream &is);
   ~DenseHashInvertedIndex();
-  template<typename TInputIterator>
+  template <typename TInputIterator>
   int Build(TInputIterator first, TInputIterator last);
-  int GetValues(Key key, Value const ** values, size_t *length) const;
+  int GetValues(Key key, Value const **values, size_t *length) const;
   int Load(std::istream &is);
   int Save(std::ostream &os);
-private:
+
+ private:
   std::tr1::unordered_map<Key, uint32_t> key_map_;
   std::vector<uint32_t> offsets_;
   std::vector<Value> values_;
-
 };
 
-template<typename TKey, typename TValue>
-DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex() :
-    key_map_(0), offsets_(0), values_(0) {
-}
+template <typename TKey, typename TValue>
+DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex()
+    : key_map_(0), offsets_(0), values_(0) {}
 
-template<typename TKey, typename TValue>
-template<typename TInputIterator>
-DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex(TInputIterator first,
-    TInputIterator last) :
-    key_map_(0), offsets_(0), values_(0) {
+template <typename TKey, typename TValue>
+template <typename TInputIterator>
+DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex(
+    TInputIterator first, TInputIterator last)
+    : key_map_(0), offsets_(0), values_(0) {
   Build(first, last);
 }
 
-template<typename TKey, typename TValue>
-DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex(std::istream &is) :
-    key_map_(0), offsets_(0), values_(0) {
+template <typename TKey, typename TValue>
+DenseHashInvertedIndex<TKey, TValue>::DenseHashInvertedIndex(std::istream &is)
+    : key_map_(0), offsets_(0), values_(0) {
   Load(is);
 }
 
-template<typename TKey, typename TValue>
-DenseHashInvertedIndex<TKey, TValue>::~DenseHashInvertedIndex() {
-}
+template <typename TKey, typename TValue>
+DenseHashInvertedIndex<TKey, TValue>::~DenseHashInvertedIndex() {}
 
-template<typename TKey, typename TValue>
-template<typename TInputIterator>
-int DenseHashInvertedIndex<TKey, TValue>::Build(TInputIterator first, TInputIterator last) {
+template <typename TKey, typename TValue>
+template <typename TInputIterator>
+int DenseHashInvertedIndex<TKey, TValue>::Build(TInputIterator first,
+                                                TInputIterator last) {
   key_map_.clear();
   std::vector<uint32_t> counters(0);
   uint32_t next_key_index = 0;
@@ -102,9 +101,11 @@ int DenseHashInvertedIndex<TKey, TValue>::Build(TInputIterator first, TInputIter
   return 0;
 }
 
-template<typename TKey, typename TValue>
-inline int DenseHashInvertedIndex<TKey, TValue>::GetValues(Key key, Value const ** values, size_t *length) const {
-  typename std::tr1::unordered_map<Key, uint32_t>::const_iterator find_it = key_map_.find(key);
+template <typename TKey, typename TValue>
+inline int DenseHashInvertedIndex<TKey, TValue>::GetValues(
+    Key key, Value const **values, size_t *length) const {
+  typename std::tr1::unordered_map<Key, uint32_t>::const_iterator find_it =
+      key_map_.find(key);
   if (find_it != key_map_.end()) {
     *values = &values_[offsets_[find_it->second]];
     *length = offsets_[find_it->second + 1] - offsets_[find_it->second];
@@ -119,44 +120,46 @@ inline int DenseHashInvertedIndex<TKey, TValue>::GetValues(Key key, Value const 
   }
 }
 
-template<typename TKey, typename TValue>
+template <typename TKey, typename TValue>
 int DenseHashInvertedIndex<TKey, TValue>::Load(std::istream &is) {
   size_t key_map_size = 0;
-  is.read((char *) &key_map_size, sizeof(key_map_size));
+  is.read((char *)&key_map_size, sizeof(key_map_size));
   std::vector<std::pair<Key, uint32_t> > key_map_array(key_map_size);
-  for (typename std::vector<std::pair<Key, uint32_t> >::iterator it = key_map_array.begin();
-      it != key_map_array.end(); ++it) {
-    is.read((char *) &(it->first), sizeof(it->first));
-    is.read((char *) &(it->second), sizeof(it->second));
+  for (typename std::vector<std::pair<Key, uint32_t> >::iterator it =
+           key_map_array.begin();
+       it != key_map_array.end(); ++it) {
+    is.read((char *)&(it->first), sizeof(it->first));
+    is.read((char *)&(it->second), sizeof(it->second));
   }
   key_map_.clear();
   key_map_.insert(key_map_array.begin(), key_map_array.end());
   size_t offsets_size = 0;
-  is.read((char *) &offsets_size, sizeof(offsets_size));
+  is.read((char *)&offsets_size, sizeof(offsets_size));
   offsets_.resize(offsets_size);
-  is.read((char *) &offsets_[0], sizeof(offsets_[0]) * offsets_.size());
+  is.read((char *)&offsets_[0], sizeof(offsets_[0]) * offsets_.size());
   size_t values_size = 0;
-  is.read((char *) &values_size, sizeof(values_size));
+  is.read((char *)&values_size, sizeof(values_size));
   values_.resize(values_size);
-  is.read((char *) &values_[0], sizeof(values_[0]) * values_.size());
+  is.read((char *)&values_[0], sizeof(values_[0]) * values_.size());
   return 0;
 }
 
-template<typename TKey, typename TValue>
+template <typename TKey, typename TValue>
 int DenseHashInvertedIndex<TKey, TValue>::Save(std::ostream &os) {
   size_t key_map_size = key_map_.size();
-  os.write((char *) &key_map_size, sizeof(key_map_size));
-  for (typename std::tr1::unordered_map<Key, uint32_t>::iterator it = key_map_.begin();
-      it != key_map_.end(); ++it) {
-    os.write((char *) &(it->first), sizeof(it->first));
-    os.write((char *) &(it->second), sizeof(it->second));
+  os.write((char *)&key_map_size, sizeof(key_map_size));
+  for (typename std::tr1::unordered_map<Key, uint32_t>::iterator it =
+           key_map_.begin();
+       it != key_map_.end(); ++it) {
+    os.write((char *)&(it->first), sizeof(it->first));
+    os.write((char *)&(it->second), sizeof(it->second));
   }
   size_t offsets_size = offsets_.size();
-  os.write((char *) &offsets_size, sizeof(offsets_size));
-  os.write((char *) &offsets_[0], sizeof(offsets_[0]) * offsets_.size());
+  os.write((char *)&offsets_size, sizeof(offsets_size));
+  os.write((char *)&offsets_[0], sizeof(offsets_[0]) * offsets_.size());
   size_t values_size = values_.size();
-  os.write((char *) &values_size, sizeof(values_size));
-  os.write((char *) &values_[0], sizeof(values_[0]) * values_.size());
+  os.write((char *)&values_size, sizeof(values_size));
+  os.write((char *)&values_[0], sizeof(values_[0]) * values_.size());
   return 0;
 }
 

@@ -1,16 +1,19 @@
-#include <gtest/gtest.h>
-#include <string>
-#include <stdint.h>
-#include <fstream>
-#include "../src/alphabet_coder.h"
-#include "../src/sequence_type.h"
-#include "../src/dna_type.h"
 #include "../src/perfect_hash_inverted_index.h"
+#include "../src/alphabet_coder.h"
+#include "../src/dna_type.h"
+#include "../src/sequence_type.h"
+
+#include <stdint.h>
+
+#include <fstream>
+#include <string>
+
+#include <gtest/gtest.h>
 
 using namespace std;
 
-class PerfectHashInvertedIndexTest: public ::testing::Test {
-protected:
+class PerfectHashInvertedIndexTest : public ::testing::Test {
+ protected:
   typedef uint32_t Value;
   typedef uint32_t Key;
   static const Key kMaxKey = 2;
@@ -21,16 +24,15 @@ protected:
     key_value_pairs_.push_back(make_pair((Key)2, (Value)2));
   }
 
-  virtual void TearDown() {
+  virtual void TearDown() {}
 
-  }
-
-  std::vector< std::pair<Key, Value> > key_value_pairs_;
+  std::vector<std::pair<Key, Value> > key_value_pairs_;
   TestIndex inverted_index_;
 };
 
 TEST_F(PerfectHashInvertedIndexTest, Build) {
-  EXPECT_EQ(0, inverted_index_.Build(key_value_pairs_.begin(), key_value_pairs_.end()));
+  EXPECT_EQ(0, inverted_index_.Build(key_value_pairs_.begin(),
+                                     key_value_pairs_.end()));
 }
 
 TEST_F(PerfectHashInvertedIndexTest, GetValues) {
@@ -64,8 +66,8 @@ TEST_F(PerfectHashInvertedIndexTest, LoadAndSave) {
     const TestIndex::Value *loaded_index_values;
     size_t loaded_index_length = 0;
     int ret = inverted_index_.GetValues(hash, &values, &length);
-    EXPECT_EQ(ret,
-        loaded_inverted_index.GetValues(hash, &loaded_index_values, &loaded_index_length));
+    EXPECT_EQ(ret, loaded_inverted_index.GetValues(hash, &loaded_index_values,
+                                                   &loaded_index_length));
     if (ret == 0) {
       EXPECT_EQ(length, loaded_index_length);
       for (size_t values_i = 0; values_i < length; ++values_i) {
@@ -74,4 +76,3 @@ TEST_F(PerfectHashInvertedIndexTest, LoadAndSave) {
     }
   }
 }
-

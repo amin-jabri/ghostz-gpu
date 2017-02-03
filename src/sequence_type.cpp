@@ -7,5 +7,4 @@
 
 #include "sequence_type.h"
 
-SequenceType::~SequenceType()
-{}
+SequenceType::~SequenceType() {}

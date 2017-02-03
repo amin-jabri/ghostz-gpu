@@ -6,14 +6,17 @@
  */
 
 #include "translator.h"
+
+#include <stdint.h>
+
+#include <algorithm>
+#include <map>
+#include <sstream>
+#include <string>
+
 #include "dna_sequence.h"
 #include "protein_sequence.h"
 #include "protein_type.h"
-#include <sstream>
-#include <string>
-#include <map>
-#include <algorithm>
-#include <stdint.h>
 
 using namespace std;
 
@@ -101,7 +104,8 @@ Translator::Translator() {
   codon_table_.insert(map<string, string>::value_type("TTT", "F"));
 }
 
-void Translator::Translate(const DnaSequence &dna, vector<ProteinSequence> &proteins) {
+void Translator::Translate(const DnaSequence &dna,
+                           vector<ProteinSequence> &proteins) {
   string sequences[2];
   sequences[0] = dna.GetSequenceData();
   sequences[1] = dna.GetComplementaryStrand();
@@ -123,10 +127,12 @@ void Translator::Translate(const DnaSequence &dna, vector<ProteinSequence> &prot
       bool translated = true;
       for (uint32_t j = offset; j < dna_length - 2; j += 3) {
         string codon = seq.substr(j, 3);
-        if (find(start_codons_.begin(), start_codons_.end(), codon) != start_codons_.end()) {
+        if (find(start_codons_.begin(), start_codons_.end(), codon) !=
+            start_codons_.end()) {
           translated = true;
         }
-        if ((translated || !stoped) && codon_table_.find(codon) != codon_table_.end()) {
+        if ((translated || !stoped) &&
+            codon_table_.find(codon) != codon_table_.end()) {
           new_seq << codon_table_[codon];
           if (codon_table_[codon] == "*") {
             translated = false;

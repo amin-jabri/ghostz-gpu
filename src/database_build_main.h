@@ -9,19 +9,21 @@
 #define DATABASE_BUILD_MAIN_H_
 
 #include <string>
-#include "seed_searcher.h"
+
 #include "aligner.h"
+#include "seed_searcher.h"
 
 class DatabaseBuildMain {
-public:
-	typedef Database<SeedSearcher> DatabaseType;
-	DatabaseBuildMain();
-	virtual ~DatabaseBuildMain();
-	int Run(int argc, char* argv[]);
+ public:
+  typedef Database<SeedSearcher> DatabaseType;
+  DatabaseBuildMain();
+  virtual ~DatabaseBuildMain();
+  int Run(int argc, char *argv[]);
 
-private:
-	bool BuildParameters(int argc, char* argv[], std::string &input_filename,
-			std::string &database_filename, Aligner::DatabaseParameters &parameters);
+ private:
+  bool BuildParameters(int argc, char *argv[], std::string &input_filename,
+                       std::string &database_filename,
+                       Aligner::DatabaseParameters &parameters);
 };
 
 #endif /* DATABASE_BUILD_MAIN_H_ */

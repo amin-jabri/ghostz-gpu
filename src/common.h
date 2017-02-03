@@ -12,7 +12,6 @@
 
 namespace common {
 static const std::string kVersion = "1.0.1";
-
 }
 
 #endif /* COMMON_H_ */

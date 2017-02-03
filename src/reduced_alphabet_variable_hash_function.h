@@ -9,21 +9,28 @@
 #define REDUCED_ALPHABET_VARIABLE_HASH_FUNCTION_H_
 
 #include <stdint.h>
+
+#include <istream>
+#include <ostream>
+#include <vector>
+
 #include "alphabet_coder.h"
 #include "score_matrix.h"
 
 class ReducedAlphabetVariableHashFunction {
-public:
+ public:
   typedef uint32_t Hash;
   static const uint32_t kMinHashLength = 6;
   ReducedAlphabetVariableHashFunction();
-  ReducedAlphabetVariableHashFunction(AlphabetCoder::Code max_code, int score_threshold,
-      uint32_t max_length, std::vector<AlphabetCoder::Code> &reduced_code_map,
+  ReducedAlphabetVariableHashFunction(
+      AlphabetCoder::Code max_code, int score_threshold, uint32_t max_length,
+      std::vector<AlphabetCoder::Code> &reduced_code_map,
       std::vector<int> code_scores);
   ReducedAlphabetVariableHashFunction(std::istream &is);
   virtual ~ReducedAlphabetVariableHashFunction();
 
-  int CalculateHash(const AlphabetCoder::Code *sequence, Hash *hash, uint32_t *hash_length) const;
+  int CalculateHash(const AlphabetCoder::Code *sequence, Hash *hash,
+                    uint32_t *hash_length) const;
   int CalculateHash(const AlphabetCoder::Code *sequence, Hash *hash) const;
 
   uint32_t GetMaxLength() const;
@@ -34,9 +41,10 @@ public:
   int Save(std::ostream &os) const;
   int Load(std::istream &is);
 
-private:
+ private:
   int SetShiftSize(AlphabetCoder::Code max_code);
-  int SetMaxHash(AlphabetCoder::Code max_code, uint32_t k_mer_length, uint32_t shift_size);
+  int SetMaxHash(AlphabetCoder::Code max_code, uint32_t k_mer_length,
+                 uint32_t shift_size);
   bool can_calculate_hash_flag_;
   AlphabetCoder::Code max_code_;
   int score_threshold_;

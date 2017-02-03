@@ -8,19 +8,17 @@
 #ifndef FASTA_SEQUENCE_READER_H_
 #define FASTA_SEQUENCE_READER_H_
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 class FastaSequenceReader {
-public:
+ public:
   FastaSequenceReader();
   FastaSequenceReader(std::istream &in);
-  void SetFileStream(std::istream &in) {
-    in_ = &in;
-  }
+  void SetFileStream(std::istream &in) { in_ = &in; }
   bool IsRead() {
-    if(in_ != NULL && *in_) {
+    if (in_ != NULL && *in_) {
       return true;
     } else {
       return false;
@@ -32,14 +30,12 @@ public:
     in_->seekg(position);
   }
 
-  std::istream::pos_type Tell(){
-    return in_->tellg();
-  }
+  std::istream::pos_type Tell() { return in_->tellg(); }
 
   bool Read(std::string &name, std::string &sequence);
-private:
-  std::istream *in_;
 
+ private:
+  std::istream *in_;
 };
 
 #endif /* FASTA_SEQUENCE_READER_H_ */

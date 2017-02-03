@@ -11,10 +11,11 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 #include "alphabet_coder.h"
 
 class ReducedAlphabetFileReader {
-public:
+ public:
   bool Read(std::istream &in, std::vector<std::string> &alphabet_sets);
 };
 

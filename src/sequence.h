@@ -11,29 +11,19 @@
 #include <string>
 
 class Sequence {
-public:
+ public:
   Sequence(const std::string &name, const std::string &sequence_data)
-  :name_(name), sequence_data_(sequence_data)
-  {}
+      : name_(name), sequence_data_(sequence_data) {}
 
-  virtual ~Sequence()
-  {}
+  virtual ~Sequence() {}
 
-  std::string GetName() const {
-    return name_;
-  }
+  std::string GetName() const { return name_; }
 
-  std::string GetSequenceData() const {
-    return sequence_data_;
-  }
+  std::string GetSequenceData() const { return sequence_data_; }
 
-
-
-
-private:
+ private:
   std::string name_;
   std::string sequence_data_;
-
 };
 
 #endif /* SEQUENCE_H_ */

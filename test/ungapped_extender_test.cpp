@@ -6,11 +6,12 @@
  *
  */
 
-#include "../src/dna_type.h"
-#include "../src/alphabet_coder.h"
-#include "../src/score_matrix.h"
-#include "../src/edit_blocks.h"
 #include "../src/ungapped_extender.h"
+#include "../src/alphabet_coder.h"
+#include "../src/dna_type.h"
+#include "../src/edit_blocks.h"
+#include "../src/score_matrix.h"
+
 #include <gtest/gtest.h>
 
 using namespace std;
@@ -38,13 +39,13 @@ TEST(UngappedExtendTest, ExtendOneSide) {
   int best_sequence0_position;
   int best_sequence1_position;
   bool ret = e.ExtendOneSide(&encoded_seq0[1], &encoded_seq1[1], delimiter_code,
-      false, score_matrix, INT_MAX, &best_score, &best_sequence0_position,
-      &best_sequence1_position, &edit_blocks);
+                             false, score_matrix, INT_MAX, &best_score,
+                             &best_sequence0_position, &best_sequence1_position,
+                             &edit_blocks);
   EXPECT_EQ(true, ret);
   EXPECT_EQ(9, best_score);
   EXPECT_EQ(5, best_sequence0_position);
   EXPECT_EQ(5, best_sequence1_position);
-
 }
 
 TEST(UngappedExtendTest, ExtendOneSideReverse) {
@@ -70,17 +71,19 @@ TEST(UngappedExtendTest, ExtendOneSideReverse) {
   int best_sequence0_position;
   int best_sequence1_position;
   bool ret = e.ExtendOneSide(&encoded_seq0[1], &encoded_seq1[1], delimiter_code,
-      false, score_matrix, INT_MAX, &best_score, &best_sequence0_position,
-      &best_sequence1_position, &edit_blocks);
+                             false, score_matrix, INT_MAX, &best_score,
+                             &best_sequence0_position, &best_sequence1_position,
+                             &edit_blocks);
   int reverse_best_score;
-  ret = e.ExtendOneSide(&encoded_seq0[encoded_seq0.size() - 3], &encoded_seq1[encoded_seq1.size() - 3], delimiter_code,
-      true, score_matrix, INT_MAX, &reverse_best_score, &best_sequence0_position,
-      &best_sequence1_position, &edit_blocks);
+  ret = e.ExtendOneSide(&encoded_seq0[encoded_seq0.size() - 3],
+                        &encoded_seq1[encoded_seq1.size() - 3], delimiter_code,
+                        true, score_matrix, INT_MAX, &reverse_best_score,
+                        &best_sequence0_position, &best_sequence1_position,
+                        &edit_blocks);
   EXPECT_EQ(true, ret);
   EXPECT_EQ(best_score, reverse_best_score);
   EXPECT_EQ(-5, best_sequence0_position);
   EXPECT_EQ(-5, best_sequence1_position);
-
 }
 
 TEST(UngappedExtendTest, ExtendOneSideCutoffTest) {
@@ -105,13 +108,12 @@ TEST(UngappedExtendTest, ExtendOneSideCutoffTest) {
   int best_score;
   int best_sequence0_position;
   int best_sequence1_position;
-  bool ret = e.ExtendOneSide(&encoded_seq0[1], &encoded_seq1[1], delimiter_code,
-      false, score_matrix, 1, &best_score, &best_sequence0_position,
-      &best_sequence1_position, &edit_blocks);
+  bool ret =
+      e.ExtendOneSide(&encoded_seq0[1], &encoded_seq1[1], delimiter_code, false,
+                      score_matrix, 1, &best_score, &best_sequence0_position,
+                      &best_sequence1_position, &edit_blocks);
   EXPECT_EQ(true, ret);
   EXPECT_EQ(4, best_score);
   EXPECT_EQ(1, best_sequence0_position);
   EXPECT_EQ(1, best_sequence1_position);
-
 }
-

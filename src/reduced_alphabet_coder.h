@@ -10,19 +10,24 @@
 
 #include <string>
 #include <vector>
-#include "sequence_type.h"
+
 #include "alphabet_coder.h"
+#include "sequence_type.h"
 
 class ReducedAlphabetCoder : public AlphabetCoder {
-public:
+ public:
   ReducedAlphabetCoder();
   ReducedAlphabetCoder(const SequenceType &type);
-  ReducedAlphabetCoder(const SequenceType &type, const std::vector<std::string> &alphabet_sets);
+  ReducedAlphabetCoder(const SequenceType &type,
+                       const std::vector<std::string> &alphabet_sets);
   virtual ~ReducedAlphabetCoder();
 
-  bool Set(const SequenceType &type, const std::vector<std::string> &alphabet_sets);
-private:
-  char GetRepresentativeAlphabet(const std::vector<std::string> &alphabet_sets, const char c);
+  bool Set(const SequenceType &type,
+           const std::vector<std::string> &alphabet_sets);
+
+ private:
+  char GetRepresentativeAlphabet(const std::vector<std::string> &alphabet_sets,
+                                 const char c);
 };
 
 #endif /* REDUCED_ALPHABET_CODER_H_ */

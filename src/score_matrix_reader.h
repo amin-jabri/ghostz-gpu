@@ -9,21 +9,22 @@
 #define SCORE_MATRIX_READER_H_
 
 #include <fstream>
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <list>
+#include <string>
+
 #include "alphabet_coder.h"
 #include "sequence_type.h"
-
 
 class ScoreMatrix;
 
 class ScoreMatrixReader {
-public:
-  void Read(std::istream &in, SequenceType &type, std::vector<int> &matrix, unsigned int &number_letters);
+ public:
+  void Read(std::istream &in, SequenceType &type, std::vector<int> &matrix,
+            unsigned int &number_letters);
 
-private:
+ private:
   std::list<std::string> Split(std::string str, std::string delim);
   int GetNumberLetters(const AlphabetCoder &coder);
   int GetMatrixSize(const AlphabetCoder &coder);

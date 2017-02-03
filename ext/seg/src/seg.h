@@ -36,19 +36,20 @@
 #ifndef _SEG_H_
 #define _SEG_H_
 
-#include <vector>
 #include <string>
 #include <tr1/memory>
+#include <vector>
 
 namespace seg {
 
 class Seg {
-public:
+ public:
   Seg();
   Seg(int window);
   ~Seg();
   int MaskSequence(const std::string &seq, std::string *masked_seq);
-private:
+
+ private:
   typedef struct WindowType {
     char *seq;
     int start;
@@ -83,7 +84,7 @@ private:
   double LnAss(int *sv);
   void MergeSegments(Window &seq, SegmentPtr &segs);
   void MakeMaskedSequence(Window &seq, SegmentPtr &segs,
-      std::string *masked_sequence);
+                          std::string *masked_sequence);
   void AppendSequment(SegmentPtr &segs, SegmentPtr &seg);
   void InitEntropies(int window);
   double CalculateEntropy(const std::vector<int> &state);
@@ -92,7 +93,7 @@ private:
   void SetState(Window *seq);
   void SetComposition(Window *win);
   void SetEntropy(Window *win);
-  bool BuildWindow(Window &parent, int start, int length, Window* window);
+  bool BuildWindow(Window &parent, int start, int length, Window *window);
   void DecrementState(int *state, int thisclass);
   void IncrementState(int *state, int thisclass);
   void Upper(char *string, size_t len);
@@ -109,7 +110,6 @@ private:
   char non_aa_char_;
   std::vector<int> aa_code_map_;
 };
-
 }
 
 #endif

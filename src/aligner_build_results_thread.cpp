@@ -6,6 +6,3 @@
  */
 
 #include "aligner_build_results_thread.h"
-#include "gapped_extender.h"
-
-using namespace std;
