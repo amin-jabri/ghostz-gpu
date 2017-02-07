@@ -1,6 +1,8 @@
+#include "packed_alphabet_code.h"
+
 #include <assert.h>
 
-#include "packed_alphabet_code.h"
+#include "alphabet_coder.h"
 
 namespace packed_alphabet_code {
 size_t GetPackedAlphabetCodeSequenceLength(size_t code_sequence_length) {

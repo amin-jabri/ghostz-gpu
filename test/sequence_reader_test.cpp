@@ -5,14 +5,15 @@
  *      Author: shu
  */
 
-#include "../src/fasta_sequence_reader.h"
-#include "../src/sequence.h"
+#include "fasta_sequence_reader.h"
 
 #include <stdint.h>
 
 #include <iostream>
 
 #include <gtest/gtest.h>
+
+#include "sequence.h"
 
 using namespace std;
 

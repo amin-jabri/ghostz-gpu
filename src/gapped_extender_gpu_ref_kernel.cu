@@ -9,6 +9,7 @@
 #define GAPPED_EXTENDER_GPU_REF_CU_
 
 /*
+#include "gapped_extender_gpu.h"
 
 #include <assert.h>
 
@@ -20,7 +21,6 @@
 #include <thrust/system/cuda/experimental/pinned_allocator.h>
 
 #include "cuda_common.h"
-#include "gapped_extender_gpu.h"
 #include "score_matrix.h"
 
 using namespace std;

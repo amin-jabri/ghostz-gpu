@@ -6,13 +6,14 @@
  *
  */
 
-#include "../src/ungapped_extender.h"
-#include "../src/alphabet_coder.h"
-#include "../src/dna_type.h"
-#include "../src/edit_blocks.h"
-#include "../src/score_matrix.h"
+#include "ungapped_extender.h"
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "dna_type.h"
+#include "edit_blocks.h"
+#include "score_matrix.h"
 
 using namespace std;
 

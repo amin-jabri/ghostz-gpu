@@ -1,11 +1,12 @@
-#include "../src/chain_filter.h"
-#include "../src/alphabet_coder.h"
-#include "../src/dna_type.h"
-#include "../src/edit_blocks.h"
-#include "../src/score_matrix.h"
-#include "../src/seed_searcher_common.h"
+#include "chain_filter.h"
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "dna_type.h"
+#include "edit_blocks.h"
+#include "score_matrix.h"
+#include "seed_searcher_common.h"
 
 using namespace std;
 

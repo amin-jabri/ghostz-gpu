@@ -5,6 +5,8 @@
  *      Author: shu
  */
 
+#include "ungapped_extender_gpu.h"
+
 #include <assert.h>
 
 #include <cstdlib>
@@ -20,7 +22,6 @@
 #include "group_loader.h"
 #include "packed_alphabet_code.h"
 #include "score_matrix.h"
-#include "ungapped_extender_gpu.h"
 
 using namespace std;
 

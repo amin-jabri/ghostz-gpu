@@ -5,14 +5,7 @@
  *      Author: shu
  */
 
-#include "../src/gapped_extender.h"
-#include "../src/alphabet_coder.h"
-#include "../src/dna_type.h"
-#include "../src/edit_blocks.h"
-#include "../src/protein_type.h"
-#include "../src/score_matrix.h"
-#include "../src/score_matrix.h"
-#include "../src/sequence_type.h"
+#include "gapped_extender.h"
 
 #include <limits.h>
 #include <stdint.h>
@@ -21,6 +14,14 @@
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "dna_type.h"
+#include "edit_blocks.h"
+#include "protein_type.h"
+#include "score_matrix.h"
+#include "score_matrix.h"
+#include "sequence_type.h"
 
 using namespace std;
 

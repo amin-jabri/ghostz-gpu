@@ -5,20 +5,20 @@
  *      Author: shu
  */
 
-#include "../src/one_mismatch_hash_generator.h"
-#include "../src/alphabet_coder.h"
-#include "../src/protein_type.h"
-#include "../src/reduced_alphabet_coder.h"
-#include "../src/reduced_alphabet_file_reader.h"
-#include "../src/reduced_alphabet_k_mer_hash_function.h"
+#include "one_mismatch_hash_generator.h"
 
-#include <stdint.h>
 #include <stdint.h>
 
 #include <fstream>
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "protein_type.h"
+#include "reduced_alphabet_coder.h"
+#include "reduced_alphabet_file_reader.h"
+#include "reduced_alphabet_k_mer_hash_function.h"
 
 using namespace std;
 

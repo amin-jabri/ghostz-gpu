@@ -5,14 +5,15 @@
  *      Author: shu
  */
 
-#include "../src/dna_sequence.h"
-#include "../src/sequence.h"
+#include "dna_sequence.h"
 
 #include <stdint.h>
 
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "sequence.h"
 
 using namespace std;
 

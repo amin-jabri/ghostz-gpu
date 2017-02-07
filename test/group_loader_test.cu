@@ -1,5 +1,4 @@
-#include "../src/cuda_common.h"
-#include "../src/group_loader.h"
+#include "group_loader.h"
 
 #include <assert.h>
 #include <stdint.h>
@@ -13,6 +12,8 @@
 #include <thrust/sort.h>
 
 #include <gtest/gtest.h>
+
+#include "cuda_common.h"
 
 __global__ void GroupLoadTestKernel(uint64_t* d_in, uint32_t* d_in_pos,
                                     uint64_t* d_out, int N) {

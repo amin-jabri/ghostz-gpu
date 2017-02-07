@@ -5,10 +5,16 @@
  *      Author: shu
  */
 
+#include "distance_calculator_gpu.h"
+
 #include <assert.h>
 
+#include <thrust/copy.h>
+#include <thrust/device_vector.h>
+#include <thrust/host_vector.h>
+#include <thrust/system/cuda/experimental/pinned_allocator.h>
+
 #include "cuda_common.h"
-#include "distance_calculator_gpu.h"
 #include "group_loader.h"
 #include "packed_alphabet_code.h"
 

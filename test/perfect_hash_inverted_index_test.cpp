@@ -1,7 +1,4 @@
-#include "../src/perfect_hash_inverted_index.h"
-#include "../src/alphabet_coder.h"
-#include "../src/dna_type.h"
-#include "../src/sequence_type.h"
+#include "perfect_hash_inverted_index.h"
 
 #include <stdint.h>
 
@@ -9,6 +6,10 @@
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "dna_type.h"
+#include "sequence_type.h"
 
 using namespace std;
 

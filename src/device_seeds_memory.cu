@@ -5,9 +5,9 @@
  *      Author: shu
  */
 
-#include <cub/cub.cuh>
-
 #include "device_seeds_memory.h"
+
+#include <cub/cub.cuh>
 
 DeviceSeedsMemory::DeviceSeedsMemory() : size_(0), temp_storage_bytes(0) {}
 

@@ -5,9 +5,9 @@
  *      Author: shu
  */
 
-#include <vector>
-
 #include "aligner_gpu_data.h"
+
+#include <vector>
 
 using namespace std;
 

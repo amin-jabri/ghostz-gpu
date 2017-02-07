@@ -1,4 +1,4 @@
-#include "../src/reduced_alphabet_file_reader.h"
+#include "reduced_alphabet_file_reader.h"
 
 #include <stdint.h>
 

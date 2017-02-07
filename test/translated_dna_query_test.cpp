@@ -1,17 +1,18 @@
-#include "../src/translated_dna_query.h"
-#include "../src/fasta_sequence_reader.h"
-#include "../src/protein_type.h"
-#include "../src/score_matrix_reader.h"
-#include "../src/sequence.h"
-#include "../src/sequence_no_filter.h"
-#include "../src/statistics.h"
-#include "../src/translator.h"
+#include "translated_dna_query.h"
 
 #include <stdint.h>
 
 #include <iostream>
 
 #include <gtest/gtest.h>
+
+#include "fasta_sequence_reader.h"
+#include "protein_type.h"
+#include "score_matrix_reader.h"
+#include "sequence.h"
+#include "sequence_no_filter.h"
+#include "statistics.h"
+#include "translator.h"
 
 using namespace std;
 

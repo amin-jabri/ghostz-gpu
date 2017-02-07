@@ -5,12 +5,7 @@
  *      Author: shu
  */
 
-#include "../src/score_matrix.h"
-#include "../src/alphabet_coder.h"
-#include "../src/dna_type.h"
-#include "../src/protein_type.h"
-#include "../src/score_matrix_reader.h"
-#include "../src/sequence_type.h"
+#include "score_matrix.h"
 
 #include <stdint.h>
 
@@ -18,6 +13,12 @@
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "dna_type.h"
+#include "protein_type.h"
+#include "score_matrix_reader.h"
+#include "sequence_type.h"
 
 using namespace std;
 

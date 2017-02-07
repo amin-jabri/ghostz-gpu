@@ -5,17 +5,18 @@
  *      Author: shu
  */
 
-#include "../src/translator.h"
-#include "../src/dna_sequence.h"
-#include "../src/protein_sequence.h"
-#include "../src/protein_type.h"
-#include "../src/sequence_type.h"
+#include "translator.h"
 
 #include <stdint.h>
 
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "dna_sequence.h"
+#include "protein_sequence.h"
+#include "protein_type.h"
+#include "sequence_type.h"
 
 using namespace std;
 

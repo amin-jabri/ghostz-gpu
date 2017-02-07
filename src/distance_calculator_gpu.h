@@ -8,11 +8,11 @@
 #ifndef DISTANCE_CALCULATOR_GPU_H_
 #define DISTANCE_CALCULATOR_GPU_H_
 
-#include <thrust/copy.h>
-#include <thrust/device_vector.h>
-#include <thrust/host_vector.h>
-#include <thrust/system/cuda/experimental/pinned_allocator.h>
+#include <stdint.h>
 
+#include <cuda_runtime_api.h>
+
+#include "alphabet_coder.h"
 #include "distance_calculator.h"
 #include "packed_alphabet_code.h"
 

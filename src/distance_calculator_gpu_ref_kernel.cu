@@ -1,5 +1,6 @@
-#include "cuda_common.h"
 #include "distance_calculator_gpu.h"
+
+#include "cuda_common.h"
 #include "packed_alphabet_code.h"
 
 /*

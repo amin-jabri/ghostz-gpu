@@ -1,11 +1,4 @@
-#include "../src/distance_calculator.h"
-#include "../src/alphabet_coder.h"
-#include "../src/protein_type.h"
-#include "../src/reduced_alphabet_coder.h"
-#include "../src/reduced_alphabet_file_reader.h"
-#include "../src/reduced_alphabet_variable_hash_function.h"
-#include "../src/score_matrix.h"
-#include "../src/score_matrix_reader.h"
+#include "distance_calculator.h"
 
 #include <stdint.h>
 
@@ -16,6 +9,14 @@
 #include <vector>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "protein_type.h"
+#include "reduced_alphabet_coder.h"
+#include "reduced_alphabet_file_reader.h"
+#include "reduced_alphabet_variable_hash_function.h"
+#include "score_matrix.h"
+#include "score_matrix_reader.h"
 
 using namespace std;
 

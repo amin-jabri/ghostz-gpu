@@ -1,13 +1,4 @@
-#include "../src/aligner_gpu_data.h"
-#include "../src/alphabet_coder.h"
-#include "../src/cuda_common.h"
-#include "../src/distance_calculator_gpu.h"
-#include "../src/protein_type.h"
-#include "../src/reduced_alphabet_coder.h"
-#include "../src/reduced_alphabet_file_reader.h"
-#include "../src/reduced_alphabet_variable_hash_function.h"
-#include "../src/score_matrix.h"
-#include "../src/score_matrix_reader.h"
+#include "distance_calculator_gpu.h"
 
 #include <stdint.h>
 
@@ -21,6 +12,16 @@
 #include <thrust/device_vector.h>
 
 #include <gtest/gtest.h>
+
+#include "aligner_gpu_data.h"
+#include "alphabet_coder.h"
+#include "cuda_common.h"
+#include "protein_type.h"
+#include "reduced_alphabet_coder.h"
+#include "reduced_alphabet_file_reader.h"
+#include "reduced_alphabet_variable_hash_function.h"
+#include "score_matrix.h"
+#include "score_matrix_reader.h"
 
 using namespace std;
 

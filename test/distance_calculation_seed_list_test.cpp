@@ -1,11 +1,12 @@
-#include "../src/distance_calculation_seed_list.h"
-#include "../src/host_seeds_memory.h"
+#include "distance_calculation_seed_list.h"
 
 #include <stdint.h>
 
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "host_seeds_memory.h"
 
 using namespace std;
 

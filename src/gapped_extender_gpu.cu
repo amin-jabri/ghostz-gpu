@@ -5,6 +5,8 @@
  *      Author: shu
  */
 
+#include "gapped_extender_gpu.h"
+
 #include <assert.h>
 
 #include <iostream>
@@ -16,7 +18,6 @@
 #include <thrust/system/cuda/experimental/pinned_allocator.h>
 
 #include "cuda_common.h"
-#include "gapped_extender_gpu.h"
 #include "group_loader.h"
 #include "packed_alphabet_code.h"
 #include "score_matrix.h"

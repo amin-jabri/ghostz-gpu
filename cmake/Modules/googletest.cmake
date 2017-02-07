@@ -24,6 +24,22 @@ option(RUN_UNIT_TESTS_AFTER_BUILD
 #
 function(add_gmock_test target)
 	add_executable(${target} ${ARGN})
+  set_gmock_target_properties(${target})
+endfunction()
+
+#
+# cuda_add_gmock_test(<target> <sources>...)
+#
+#  Adds a Google Mock based test executable, <target>, built from <sources> and
+#  adds the test so that CTest will run it. Both the executable and the test
+#  will be named <target>.
+#
+function(cuda_add_gmock_test target)
+	cuda_add_executable(${target} ${ARGN})
+  set_gmock_target_properties(${target})
+endfunction()
+
+function(set_gmock_target_properties target)
 	set_target_properties(${target} PROPERTIES
 		ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/test"
 		LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/test"

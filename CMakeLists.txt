@@ -1,15 +1,15 @@
-cmake_minimum_required (VERSION 2.8 FATAL_ERROR)
+# At least version 2.8 but newer is better
+cmake_minimum_required (VERSION 3.2 FATAL_ERROR)
 
-# "C" is required for find_package(Threads)
-project("Ghostz" CXX C)
+project("Ghostz-GPU" VERSION 1.0.2 LANGUAGES CXX C)
 
 # generate compile flags database to use with YCM
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 # Project Options
-option(${PROJECT_NAME}_ENABLE_UNIT_TESTS "Enable unit-tests." OFF)
+option(${PROJECT_NAME}_ENABLE_UNIT_TESTS "Enable unit-tests." ON)
 
-option(${PROJECT_NAME}_USE_GPU "Use GPU" ON)
+option(${PROJECT_NAME}_USE_GPU "Use GPU for ${PROJECT_NAME}" ON)
 
 # Add cuda package
 find_package(CUDA 6.0 REQUIRED)
@@ -17,11 +17,10 @@ set(CUDA_PROPAGATE_HOST_FLAGS OFF)
 set(CUDA_SEPARABLE_COMPILATION OFF)
 set(CUDA_USE_STATIC_CUDA_RUNTIME ON)
 
-if (${${PROJECT_NAME}_USE_GPU})
+if(${${PROJECT_NAME}_USE_GPU})
   set(${PROJECT_NAME}_EXECUTABLE_NAME "ghostz-gpu")
   set(${PROJECT_NAME}_GPU_COMPUTE_CAPABILITY "35"
-        CACHE STRING "CUDA Compute Capability of the target GPU.")
-  add_definitions(-DGPU)
+    CACHE STRING "${PROJECT_NAME}'s CUDA Compute Capability of the target GPU.")
   set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} -gencode
     arch=compute_${${PROJECT_NAME}_GPU_COMPUTE_CAPABILITY},code=sm_${${PROJECT_NAME}_GPU_COMPUTE_CAPABILITY})
 else()
@@ -30,7 +29,7 @@ else()
 endif()
 
 # add our modules to the search path of cmake
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
 include(CheckCXXCompilerFlag)
 # add AddCXXCompilerFlag module (from google's Benchmark)  under cmake/Modules
@@ -77,8 +76,8 @@ if(NOT CONFIGURED_ONCE)
   set(CMAKE_C_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE}
     CACHE STRING "Flags used by the compiler during release builds." FORCE)
   # Cache all build modes NVCC_FLAGS
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS}
-  CACHE STRING "Flags used by the compiler during all build types." FORCE)
+  set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS}
+    CACHE STRING "Flags used by the compiler during all build types." FORCE)
 endif()
 
 # Set build type to debug mode if CMAKE_BUILD_TYPE is not set
@@ -88,36 +87,50 @@ if(NOT CMAKE_BUILD_TYPE)
     FORCE)
 endif()
 
-include(sanitizers)
-
 # ext/karlin
-add_library(karlin ${CMAKE_SOURCE_DIR}/ext/karlin/src/karlin.c)
+add_library(karlin ${CMAKE_CURRENT_SOURCE_DIR}/ext/karlin/src/karlin.c)
 set_target_properties(karlin PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-add_sanitizers(karlin)
 
 # ext/seg
-add_library(seg ${CMAKE_SOURCE_DIR}/ext/seg/src/seg.cpp)
+add_library(seg ${CMAKE_CURRENT_SOURCE_DIR}/ext/seg/src/seg.cpp)
 set_target_properties(seg PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
-add_sanitizers(seg)
+
+# Add Boost as an imported target
+find_package(Boost 1.55 REQUIRED COMPONENTS system thread)
+add_library(boost INTERFACE IMPORTED)
+set_property(TARGET boost PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+  ${Boost_INCLUDE_DIRS})
+
+add_library(boost-system SHARED IMPORTED)
+set_property(TARGET boost-system PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+  ${Boost_INCLUDE_DIRS})
+set_property(TARGET boost-system PROPERTY IMPORTED_LOCATION
+  ${Boost_SYSTEM_LIBRARY})
+
+add_library(boost-thread SHARED IMPORTED)
+set_property(TARGET boost-thread PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+  ${Boost_INCLUDE_DIRS})
+set_property(TARGET boost-thread PROPERTY IMPORTED_LOCATION
+  ${Boost_THREAD_LIBRARY})
 
 # src
-add_subdirectory(${CMAKE_SOURCE_DIR}/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTS)
   enable_testing()
   # unit tests with googletest/googlemock
   # tests are not built with 'make' or 'make all', use 'make check' instead
-  add_subdirectory(${CMAKE_SOURCE_DIR}/test EXCLUDE_FROM_ALL)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test EXCLUDE_FROM_ALL)
 endif()
 
 set(CONFIGURED_ONCE TRUE CACHE INTERNAL
   "A flag showing that CMake has configured at least once.")
 
 # Copy data dir to the binary tree to be used when testing the executable
-file(COPY ${CMAKE_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_BINARY_DIR})

@@ -5,14 +5,7 @@
  *      Author: shu
  */
 
-#include "../src/database.h"
-#include "../src/alphabet_coder.h"
-#include "../src/protein_type.h"
-#include "../src/reduced_alphabet_coder.h"
-#include "../src/reduced_alphabet_file_reader.h"
-#include "../src/score_matrix.h"
-#include "../src/score_matrix_reader.h"
-#include "../src/sequence_type.h"
+#include "database.h"
 
 #include <stdint.h>
 
@@ -21,6 +14,14 @@
 #include <tr1/memory>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "protein_type.h"
+#include "reduced_alphabet_coder.h"
+#include "reduced_alphabet_file_reader.h"
+#include "score_matrix.h"
+#include "score_matrix_reader.h"
+#include "sequence_type.h"
 
 using namespace std;
 

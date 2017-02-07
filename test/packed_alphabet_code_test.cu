@@ -1,13 +1,4 @@
-#include "../src/alphabet_coder.h"
-#include "../src/cuda_common.h"
-#include "../src/dna_type.h"
-#include "../src/edit_blocks.h"
-#include "../src/packed_alphabet_code.h"
-#include "../src/protein_type.h"
-#include "../src/score_matrix.h"
-#include "../src/score_matrix.h"
-#include "../src/sequence_type.h"
-#include "../src/ungapped_extender_gpu.h"
+#include "packed_alphabet_code.h"
 
 #include <limits.h>
 #include <stdint.h>
@@ -16,6 +7,16 @@
 #include <string>
 
 #include <gtest/gtest.h>
+
+#include "alphabet_coder.h"
+#include "cuda_common.h"
+#include "dna_type.h"
+#include "edit_blocks.h"
+#include "protein_type.h"
+#include "score_matrix.h"
+#include "score_matrix.h"
+#include "sequence_type.h"
+#include "ungapped_extender_gpu.h"
 
 using namespace std;
 

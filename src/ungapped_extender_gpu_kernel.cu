@@ -1,4 +1,5 @@
 /*
+#include "ungapped_extender_gpu.h"
 
 #include <assert.h>
 
@@ -13,7 +14,6 @@
 #include "group_loader.h"
 #include "packed_alphabet_code.h"
 #include "score_matrix.h"
-#include "ungapped_extender_gpu.h"
 
 const int debug_q_p = 119;
 const int debug_db_p = 8963 + cuda_common::kOneSideMarginSize;
