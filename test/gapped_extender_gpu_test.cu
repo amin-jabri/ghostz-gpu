@@ -26,7 +26,6 @@
 #include "edit_blocks.h"
 #include "protein_type.h"
 #include "score_matrix.h"
-#include "score_matrix.h"
 #include "sequence_type.h"
 
 using namespace std;

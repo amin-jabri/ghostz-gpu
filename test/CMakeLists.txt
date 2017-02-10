@@ -9,8 +9,8 @@ cuda_compile(GHOSTZ_TEST_GPU_OBJ
   distance_calculator_gpu_test.cu
   gapped_extender_gpu_test.cu
   group_loader_test.cu
-  # packed_alphabet_code_test.cu # Need a fix to compile
-  # ungapped_extender_gpu_test.cu # Need a fix to compile
+  packed_alphabet_code_test.cu # Need to fix warnings.
+  ungapped_extender_gpu_test.cu
   )
 
 cuda_add_gmock_test(ghostz-gpu_test

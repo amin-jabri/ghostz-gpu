@@ -30,7 +30,6 @@
 #include "logger.h"
 #include "protein_query.h"
 #include "protein_type.h"
-#include "protein_type.h"
 #include "sequence.h"
 #include "sequence_no_filter.h"
 #include "sequence_seg_filter.h"

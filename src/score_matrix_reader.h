@@ -9,7 +9,6 @@
 #define SCORE_MATRIX_READER_H_
 
 #include <fstream>
-#include <fstream>
 #include <iostream>
 #include <list>
 #include <string>

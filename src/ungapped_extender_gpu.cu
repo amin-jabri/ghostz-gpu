@@ -857,7 +857,7 @@ int UngappedExtenderGpu::ExtendWithTriggerAsync(
     size_t size, uint32_t* query_ids, uint32_t* query_concatenated_positions,
     uint32_t* database_positions, char* flags, uint32_t* d_query_ids,
     uint32_t* d_query_concatenated_positions, uint32_t* d_database_positions,
-    char* d_flags, int* d_temp_array, cudaStream_t& stream) const {
+    char* d_flags, int* /*d_temp_array*/, cudaStream_t& stream) const {
   if (query_ids != NULL) {
     CUDA_CHECK_RETURN(cudaMemcpyAsync(d_query_ids, query_ids,
                                       sizeof(query_ids[0]) * size,

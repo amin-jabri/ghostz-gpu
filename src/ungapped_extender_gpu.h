@@ -49,7 +49,7 @@ class UngappedExtenderGpu {
                              uint32_t* d_query_ids,
                              uint32_t* d_query_concatenated_positions,
                              uint32_t* d_database_positions, char* d_flags,
-                             int* d_temp_array, cudaStream_t& stream) const;
+                             int* /*d_temp_array*/, cudaStream_t& stream) const;
 
   int ExtendWithTriggerAsync(
       size_t query_seeds_size, uint32_t* query_seed_ids,

@@ -27,7 +27,6 @@
 #include "edit_blocks.h"
 #include "protein_type.h"
 #include "score_matrix.h"
-#include "score_matrix.h"
 #include "sequence_type.h"
 
 using namespace std;
@@ -105,11 +104,11 @@ TEST_F(UngappedExtenderGpuTest, ExtendShortSequencesForwardWithMinXDrop) {
   cudaStreamCreate(&stream);
   e.ExtendWithTriggerAsync(
       number_extensions, &ids[0], &sequence0_positions[0],
-      &sequence1_positions[0], &scores[0],
+      &sequence1_positions[0], (char *)&scores[0],
       thrust::raw_pointer_cast(d_ids.data()),
       thrust::raw_pointer_cast(d_sequence0_positions.data()),
       thrust::raw_pointer_cast(d_sequence1_positions.data()),
-      thrust::raw_pointer_cast(d_scores.data()), stream);
+      (char *)thrust::raw_pointer_cast(d_scores.data()), (int *)NULL, stream);
   cudaStreamSynchronize(stream);
   cudaStreamDestroy(stream);
 
@@ -181,11 +180,11 @@ TEST_F(UngappedExtenderGpuTest, ExtendShortSequencesForward) {
   cudaStreamCreate(&stream);
   e.ExtendWithTriggerAsync(
       number_extensions, &ids[0], &sequence0_positions[0],
-      &sequence1_positions[0], &scores[0],
+      &sequence1_positions[0], (char *)&scores[0],
       thrust::raw_pointer_cast(d_ids.data()),
       thrust::raw_pointer_cast(d_sequence0_positions.data()),
       thrust::raw_pointer_cast(d_sequence1_positions.data()),
-      thrust::raw_pointer_cast(d_scores.data()), stream);
+      (char *)thrust::raw_pointer_cast(d_scores.data()), (int *)NULL, stream);
   cudaStreamSynchronize(stream);
   cudaStreamDestroy(stream);
 
@@ -257,11 +256,11 @@ TEST_F(UngappedExtenderGpuTest, ExtendShortSequencesReverse) {
   cudaStreamCreate(&stream);
   e.ExtendWithTriggerAsync(
       number_extensions, &ids[0], &sequence0_positions[0],
-      &sequence1_positions[0], &scores[0],
+      &sequence1_positions[0], (char *)&scores[0],
       thrust::raw_pointer_cast(d_ids.data()),
       thrust::raw_pointer_cast(d_sequence0_positions.data()),
       thrust::raw_pointer_cast(d_sequence1_positions.data()),
-      thrust::raw_pointer_cast(d_scores.data()), stream);
+      (char *)thrust::raw_pointer_cast(d_scores.data()), (int *)NULL, stream);
   cudaStreamSynchronize(stream);
   cudaStreamDestroy(stream);
 

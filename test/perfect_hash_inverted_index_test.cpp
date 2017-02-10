@@ -32,8 +32,9 @@ class PerfectHashInvertedIndexTest : public ::testing::Test {
 };
 
 TEST_F(PerfectHashInvertedIndexTest, Build) {
-  EXPECT_EQ(0, inverted_index_.Build(key_value_pairs_.begin(),
-                                     key_value_pairs_.end()));
+  EXPECT_EQ(
+      0,
+      inverted_index_.Build(key_value_pairs_.begin(), key_value_pairs_.end()));
 }
 
 TEST_F(PerfectHashInvertedIndexTest, GetValues) {
@@ -67,8 +68,9 @@ TEST_F(PerfectHashInvertedIndexTest, LoadAndSave) {
     const TestIndex::Value *loaded_index_values;
     size_t loaded_index_length = 0;
     int ret = inverted_index_.GetValues(hash, &values, &length);
-    EXPECT_EQ(ret, loaded_inverted_index.GetValues(hash, &loaded_index_values,
-                                                   &loaded_index_length));
+    EXPECT_EQ(ret,
+              loaded_inverted_index.GetValues(hash, &loaded_index_values,
+                                              &loaded_index_length));
     if (ret == 0) {
       EXPECT_EQ(length, loaded_index_length);
       for (size_t values_i = 0; values_i < length; ++values_i) {

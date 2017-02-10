@@ -19,7 +19,6 @@
 #include "sequence.h"
 #include "sequence_filter_interface.h"
 #include "translator.h"
-#include "translator.h"
 
 class TranslatedDnaQuery : public Query {
  public:
