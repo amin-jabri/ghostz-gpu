@@ -1,3 +1,4 @@
+
 ![logo](http://www.bi.cs.titech.ac.jp/ghostz-gpu/ghostzgpu-logo.png)
 ======
 
@@ -5,11 +6,13 @@ GHOSTZ-GPU is a homology search tool which can detect remote homologues like BLA
 
 GHOSTZ-GPU outputs search results in the format similar to BLAST-tabular format.
 
+
 Requirements
 ------------
 - gcc => 4.3
 - Boost >= 1.55.0
 - CUDA >= 6.0
+
 
 Installation
 ------------
@@ -22,18 +25,19 @@ Commands:
 
     $ tar xvzf ghostz-gpu.tar.gz
     $ cd ghostz-gpu
-    $ make BOOST_PATH=Boost CUDA_TOOLKIT_PATH=CUDA
+    $ make -f Makefile_legacy BOOST_PATH=Boost CUDA_TOOLKIT_PATH=CUDA
     $ cp ghostz-gpu /AS/YOU/LIKE/
 
 
 Boost and CUDA are directories where they are installed, respectively.
-    
+​    
 Usage
 -----
 GHOSTZ-GPU requires specifically formatted database files for homology search. These files can be generated from FASTA formatted DNA/protein sequence files. 
 
 Users have to prepare a database file in FASTA format and convert it into GHOSTZ-GPU format database files by using GHOSTZ-GPU `db` command at first. GHOSTZ-GPU `db` command requires 2 args (`[-i dbFastaFile]` and `[-o dbName]`). GHOSTZ-GPU `db` command divides a database FASTA file into several database chunks and generates several files (.inf, .ind, .nam, .pos, .seq). All generated files are needed for the search. Users can specify the size of each chunk. Smaller chunk size requires smaller memory, but efficiency of the search will decrease.  
 For executing homology search, GHOSTZ-GPU `aln` command is used and that command requires at least 2 args (`[-i qryName]` and `[-d dbName]`).
+
 
 Example
 -------
@@ -80,6 +84,7 @@ Command and Options
       -a INT    The number of threads [1]
       -g INT    The number of GPUs [the number of available GPUs]
 
+
 Search results
 --------------
 GHOSTZ-GPU outputs the tab-deliminated file as search results.
@@ -111,6 +116,7 @@ Each column shows;
 10. End position of the subject in the alignment
 11. *E*-value
 12. Normalized score
+
 
 References
 ----------
