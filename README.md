@@ -14,8 +14,37 @@ Requirements
 - CUDA >= 6.0
 
 
+Optional:
+
+- CMake >= 2.8 (3.0 or higher is best)
+
+
 Installation
 ------------
+
+### CMake based
+
+1. Clone this repository
+2. Get googletest submodule (Running bootstrap.sh will check out googletest as a submodule for you)
+3. Run bootstrap.sh shell script for an out-of-source build. Provide boost_root_path as a hint.
+4. `ghostz-gpu`  will be placed under `build\bin`
+5. Optionally build and run the unit-tests. Unit-tests are placed under `build\bin\test`
+
+
+```sh
+   git clone https://github.com/akiyamalab/ghostz-gpu
+   cd ghostz-gpu
+   git submodule update --init --recursive # optional, done by running ./bootstrap.sh
+   CC=/usr/bin/gcc CXX=/usr/bin/g++ ./bootstrap.sh /usr/local/boost-1.55.0 
+   pushd build
+   make check # build and run unit-test.
+   # To only build unit-tests run: make ghostz-gpu_test
+   # To run built unit-test run: ./bin/test/ghostz-pu_test 
+   popd    
+```
+
+### Legacy install
+
 1. Download the archive of GHOSTZ-GPU from this repository.
 2. Extract the archive and cd into the extracted directory.
 3. Run make command.
@@ -30,7 +59,6 @@ Commands:
 
 
 Boost and CUDA are directories where they are installed, respectively.
-​    
 Usage
 -----
 GHOSTZ-GPU requires specifically formatted database files for homology search. These files can be generated from FASTA formatted DNA/protein sequence files. 
@@ -116,6 +144,7 @@ Each column shows;
 10. End position of the subject in the alignment
 11. *E*-value
 12. Normalized score
+
 
 
 References
