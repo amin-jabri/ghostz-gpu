@@ -529,4 +529,3 @@ void GappedExtender::PickOptimalPath(const vector<uint8_t*> &edit_script,
 		edit_blocks->Reverse();
 	}
 }
-

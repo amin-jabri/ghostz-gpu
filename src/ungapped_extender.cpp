@@ -11,4 +11,3 @@
 #include "ungapped_extender.h"
 
 using namespace std;
-
