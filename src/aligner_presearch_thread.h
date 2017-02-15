@@ -8,7 +8,8 @@
 #ifndef ALIGNER_PRESEARCH_THREAD_H_
 #define ALIGNER_PRESEARCH_THREAD_H_
 
-#include <cstdint>
+#include <stdint.h>
+
 #include <vector>
 
 #include <boost/thread.hpp>

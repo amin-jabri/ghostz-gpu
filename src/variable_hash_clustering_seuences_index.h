@@ -8,7 +8,8 @@
 #ifndef VARIABLE_HASH_CLUSTERING_SEUENCES_INDEX_H_
 #define VARIABLE_HASH_CLUSTERING_SEUENCES_INDEX_H_
 
-#include <cstdint>
+#include <stdint.h>
+
 #include <istream>
 #include <ostream>
 #include <utility>

@@ -8,7 +8,8 @@
 #ifndef NORMAL_QUERY_H_
 #define NORMAL_QUERY_H_
 
-#include <cstdint>
+#include <stdint.h>
+
 #include <vector>
 
 #include "alphabet_coder.h"
